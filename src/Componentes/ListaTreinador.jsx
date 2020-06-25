@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import {NavLink} from 'react-router-dom'
 import axios from 'axios'
 
 const ListaTreinador = (props) => {
 
     const [result, setResult] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000//treinadores/all')
+        axios.get('http://localhost:5000/treinadores/all')
           .then(function (response) {
-            console.log(response.data)
               setResult(response.data)
             })
             .catch(function (error) {
@@ -18,7 +18,6 @@ const ListaTreinador = (props) => {
 
       const changePokemom = (event)=>{
         props.onChange(event.target.value)
-        console.log(event.target.value)
       }
     
     return (
@@ -27,13 +26,12 @@ const ListaTreinador = (props) => {
           <select onChange={changePokemom}>  
           <option>Selecione um treinador</option> 
               { 
-              result.map((a,key) => <option value={a[0] + ';'+ a[1]} key={key}> { a[1] } </option> ) 
+                result.map((a,key) => <option value={a[0] + ';'+ a[1]} key={key}> { a[1] } </option> ) 
               }
           </select>
-          <a href="/novoTreinador">Cadastrar novo Treinador</a>
+              <NavLink to="/treinador/novo">Cadastrar novo Treinador</NavLink>
         </>
     )
 }
 
 export default ListaTreinador
-//a.id_pokedex+";"+a.pokemom_nome

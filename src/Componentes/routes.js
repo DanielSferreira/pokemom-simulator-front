@@ -1,7 +1,10 @@
 import Home from './../Pages/Home' ;
 import Dashboard from './../Pages/Dashboard' ;
+import EscolheParaCombate from './../Pages/EscolheParaCombate' ;
 import CadastrarPokemomParaTreinador from './../Pages/CadastrarPokemomParaTreinador' ;
 import CadastrarNovoTreinador from './../Pages/CadastrarNovoTreinador' ;
+import ComecarCombate from './../Pages/ComecarCombate' ;
+import TesteUseReducer from '../Pages/testeUseReducer';
 
 const routes = [
     {
@@ -23,6 +26,21 @@ const routes = [
         path: '/treinador/novo',
         component: CadastrarNovoTreinador,
         label: 'Cadastrar Um novo treinador'
+    },
+    {
+        path: '/Combate/escolha',
+        component: EscolheParaCombate,
+        label: 'Inicar Combate'
+    },
+    {
+        path: '/Combate/comecar',
+        component: ComecarCombate,
+        label: 'Ir para Combate'
+    },
+    {
+        path: '/teste',
+        component: TesteUseReducer,
+        label: 'Ir para Teste'
     },
 ]
 

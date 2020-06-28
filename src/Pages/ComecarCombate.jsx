@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer,useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import IniciarBatalha from "./../Componentes/IniciarBatalha";
@@ -12,6 +12,8 @@ const ComecarCombate = (props) => {
 
   const [pokemomsAdversarios, setPokemomsAdversarios] = useReducer(rPlayer, PokemomsAdversarios);
   const MovimentosPokemomOponente = MovesStruct;
+
+  const [comecoLuta,setComecoLuta] = useState(false)
 
   function pegarPokemonsOponentesGerados(r) {
     setPokemomsAdversarios(r)
@@ -42,6 +44,9 @@ const ComecarCombate = (props) => {
 
   }, [props.location.data]);
 
+  function mudarEstadoParaBatalha(e) {
+    setComecoLuta(e)
+  }
   return (
     <div>
       {
@@ -53,31 +58,89 @@ const ComecarCombate = (props) => {
             <PokemomsAdversariosRandom teste={(r) => pegarPokemonsOponentesGerados(r)} />
             <h2 onClick={() => getMovimentos()}>GetMovimentos</h2>
             <h3 onClick={() => mostrarMovimentos()}>mostrarMovimentos</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Pokemoms de: {player.treinador[1]}</th>
-                  <th>Pokemoms do Oponente</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {
-                  player.pokemoms.map((a, b) => {
-                    return (
-                      <tr key={b}>
-                        <td>{a.value}</td>
-                        <td>{pokemomsAdversarios[b].pokemom_nome}</td>
+            {
+              comecoLuta ?
+                
+                <>
+                  <table className="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th colSpan="5" scope="col">Batalha</th>
                       </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
-            <IniciarBatalha
-              player={MovimentosPokemomPlayer}
-              oponente={MovimentosPokemomOponente} >
-            </IniciarBatalha>
+                      <tr>
+                        <th scope="col">ico</th>
+                        <th scope="col">Jogador</th>
+                        <th scope="col"></th>
+                        <th scope="col">Oponente</th>
+                        <th scope="col">ico</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">?</th>
+                        <td>Mark</td>
+                        <td>VS</td>
+                        <td>Otto</td>
+                        <td>?</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">?</th>
+                        <td>Jacob</td>
+                        <td>VS</td>
+                        <td>Thornton</td>
+                        <td>?</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">?</th>
+                        <td>Larry the Bird</td>
+                        <td>VS</td>
+                        <td>Larry the Bird</td>
+                        <td>?</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+                :
+                <>
+                  <table className="table table-striped table-bordered">
+                    <thead className="thead-dark">
+                      <tr>
+                        <th colSpan="5" scope="col">Batalha Pokemon</th>
+                      </tr>
+                      <tr>
+                              <th>?</th>
+                        <th>Pokemoms de: {player.treinador[1]}</th>
+                              <th></th>
+                        <th>Pokemoms do Oponente</th>
+                              <th>?</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {
+                        player.pokemoms.map((a, b) => {
+                          return (
+                            <tr key={b}>
+                              <td>?</td>
+                              <td>{a.value}</td>
+                              <td>VS</td>
+                              <td>{pokemomsAdversarios[b].pokemom_nome}</td>
+                              <td>?</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+                  <IniciarBatalha
+                    player={MovimentosPokemomPlayer}
+                    oponente={MovimentosPokemomOponente} 
+                    MudarParaBatalha={(r)=>mudarEstadoParaBatalha(r)}>
+                  </IniciarBatalha>
+                </>
+                
+            }
           </div>
       }
     </div>

@@ -44,7 +44,7 @@ const Menu = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light" style={stl.nav}>
             <NavLink to='/' className="navbar-brand" style={stl.label}>Pokedex - Simulator Combat</NavLink>
-            <button style={{background:'tomato'}} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarText">

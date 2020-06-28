@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 
 const IniciarBatalha = (props) => {
     
@@ -77,7 +78,7 @@ const IniciarBatalha = (props) => {
         }
       }
       async function ChamarNovaBatalhaEnquantoHoverPokemom(player, oponent, next) {
-         
+        mudar()
         let playerVenceu = await simular_batalha(player[next.atual_poke_pl], oponent[next.atual_poke_op]).then(res=> res)
         
         if (next.atual_poke_op === 5) {
@@ -98,7 +99,9 @@ const IniciarBatalha = (props) => {
         }
     
       }
-
+      function mudar() {
+        props.MudarParaBatalha(true)
+      }
     return <button onClick={() => ChamarNovaBatalhaEnquantoHoverPokemom(props.player, props.oponente, { atual_poke_pl: 0, atual_poke_op: 0 })}>Simular Super Batalhas epicas</button>
 }
 

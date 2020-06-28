@@ -21,16 +21,18 @@ const ListaTreinador = (props) => {
       }
     
     return (
-        <>
-        Nome do Treinador: <br />
-          <select onChange={changePokemom}>  
+        <div className="form-group">
+        <label> Nome do Treinador: </label>
+          <select className="form-control" onChange={changePokemom}>  
           <option>Selecione um treinador</option> 
               { 
                 result.map((a,key) => <option value={a[0] + ';'+ a[1]} key={key}> { a[1] } </option> ) 
               }
           </select>
-              <NavLink to="/treinador/novo">Cadastrar novo Treinador</NavLink>
-        </>
+              <NavLink to="/treinador/novo">    
+                <small className="form-text text-muted">Cadastrar novo Treinador.</small>
+              </NavLink>
+        </div>
     )
 }
 

@@ -7,9 +7,16 @@ function App() {
   const route = routes.map(({path,component},key) => <Route exact path={path} component={component} key={key}  /> )
   
   return (
-    <Switch>
-      {route}
-    </Switch>
+    <div className='row'>
+      
+      <div className='col'></div>
+      <div className='col-8'>
+        <Switch>
+          {route}
+        </Switch>
+      </div>
+      <div className='col'></div>
+    </div>
   );
 }
 

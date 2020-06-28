@@ -17,7 +17,7 @@ const TesteUseReducer = ()=> {
    }
     return (
         <h3>
-            <button onClick={()=>setarNome('Daniel S Ferreira', '24')}>Setar</button>
+            <button className="btn btn-primary mb-2" onClick={()=>setarNome('Daniel S Ferreira', '24')}>Setar</button>
             Agora vai! {pessoa.nome} e tenho {pessoa.idade} 
         </h3>
     )

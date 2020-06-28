@@ -34,12 +34,25 @@ const CadastrarPokemomParaTreinador = (props) => {
     }
 
     return (
-        <div>
+        <div className="container">
             <h3>Cadastrar novo treinador</h3>
-            <input type="text" onChange={(e)=>setNome_treinador(e.target.value)} name="nome_treinador" id="nome_treinador" placeholder="Nome do Treinador" />
-            <input type="text" onChange={(e)=>setRegiao(e.target.value)} name="regiao" id="regiao" placeholder="Região do Treinador" />
-            <input type="text" onChange={(e)=>setId_de_treinador(e.target.value)} name="id_de_treinado" id="id_de_treinado" placeholder="numero do Treinador" />
-            <input type="button" value="Enviar" onClick={setForm} />
+            <form >
+                <div className="form-group">
+                    <label htmlFor="nome_treinador"> Nome do Treinador: </label>
+                    <input type="text" className="form-control" onChange={(e)=>setNome_treinador(e.target.value)} name="nome_treinador" id="nome_treinador" placeholder="Nome do Treinador" />
+                </div>
+                
+                <div className="form-group">
+                    <label htmlFor="regiao"> Região do Treinador: </label>
+                    <input type="text" className="form-control" onChange={(e)=>setRegiao(e.target.value)} name="regiao" id="regiao" placeholder="Região do Treinador" />
+                </div>
+                
+                <div className="form-group">
+                    <label htmlFor="id_de_treinado"> Número de Identificação do Treinador: </label>
+                    <input type="text" className="form-control" onChange={(e)=>setId_de_treinador(e.target.value)} name="id_de_treinado" id="id_de_treinado" placeholder="numero do Treinador" />
+                </div>
+                <input type="button" className="btn btn-primary mb-2" value="Enviar" onClick={setForm} />
+            </form>
         </div>
     )
 }

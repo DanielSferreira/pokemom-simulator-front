@@ -31,7 +31,7 @@ const PokemomsAdversariosRandom = (props) => {
         console.log("Vamos lá")
         props.teste([Poke1, Poke2, Poke3, Poke4, Poke5, Poke6])
     }
-    return <button onClick={pacoca}>Procurar Oponentes</button>
+    return <button className="btn btn-primary mb-2" onClick={pacoca}>Procurar Oponentes</button>
 }
 
 export default PokemomsAdversariosRandom

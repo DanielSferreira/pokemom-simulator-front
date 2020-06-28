@@ -22,15 +22,15 @@ const ListaPokemom = (props) => {
       }
     
     return (
-        <>
-        Nome do Pokemom: <br />
-        <select onChange={changePokemom}>  
+      <div className="form-group">
+      <label> Nome do Pokemon: </label>
+        <select className="form-control" onChange={changePokemom}>  
         <option>Selecione um pokemom</option> 
             { 
             result.map((a,key) => <option value={a.id_pokedex+";"+a.pokemom_nome} key={key}> { a.pokemom_nome } </option> ) 
             }
         </select>
-        </>
+        </div>
     )
 }
 

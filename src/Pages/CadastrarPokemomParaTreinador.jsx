@@ -7,6 +7,7 @@ const CadastrarPokemomParaTreinador = (props) => {
 
     const [pokemom, setPokemom] = useState('')
     const [treinador, setTreinador] = useState('')
+    const [alert, setAlert] = useState('')
     
     function Pokemom(v) {
         let data = v.split(';')
@@ -43,20 +44,43 @@ const CadastrarPokemomParaTreinador = (props) => {
         axios.post('http://localhost:5000/pokemom/setPokemomForTrainer/',sendForm)
         .then(function (response) {
             console.log(response.data)
+            if (response.data.status === 'ok') {
+                setAlert(<div className="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sucesso!</strong> Seu Pokemom foi cadastrado com Sucesso.
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>)
+            }
+            else {
+                setAlert(<div className="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Eita!</strong> Deu ruim ao cadatrar, provavelmente esse pokemom já tenha sido cadastrado.
+                <button type="button" onClick={fecha()} className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>)
+            }
           })
           .catch(function (error) {
             console.log(error);
+            setAlert(<div className="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Eita!</strong> Deu ruim ao cadatrar, provavelmente esse pokemom já tenha sido cadastrado.
+                <button type="button" onClick={fecha()} className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>)
           })
     }
-
+    function fecha() {
+        setAlert("")
+    }
     return (
         <div>
             <h3>Cadastrar novo Pokemom para um treinador</h3>
             <ListaTreinador onChange={Treinador} />
-            <br />
             <ListaPokemom onChange={Pokemom} />
-            <br />
-            <input type="button" value="Enviar" onClick={setForm} />
+            <input type="button" className="btn btn-primary mb-2" value="Enviar" onClick={setForm} />
+            {alert}
         </div>
     )
 }

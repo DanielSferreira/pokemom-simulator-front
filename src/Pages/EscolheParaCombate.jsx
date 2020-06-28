@@ -67,7 +67,22 @@ const EscolheParaCombate = (props) => {
               return <h3 key={key}> Esse Treinador não possue pokemom </h3>
             }
             else {
-              return <label key={key}> <input type="checkbox"  value={a.pokemom_nome} name={a.id_pokedex} onClick={QuantidadePokemomsSelecionado }/> {a.pokemom_nome} <br /></label>
+              return (
+                <div className="form-check" key={key}>
+                  <input 
+                    className="form-check-input" 
+                    type="checkbox" 
+                    value={a.pokemom_nome} 
+                    name={a.id_pokedex} 
+                    id={"op"+key} 
+                    onClick={QuantidadePokemomsSelecionado } 
+                  />
+                  <label className="form-check-label" htmlFor={"op"+key}>
+                  {a.pokemom_nome}
+                  </label>
+                </div>
+              // <label key={key}> <input type="checkbox"  value={a.pokemom_nome} name={a.id_pokedex} onClick={QuantidadePokemomsSelecionado }/> {a.pokemom_nome} <br /></label>
+              )
             }
           }) 
         }
@@ -82,7 +97,7 @@ const EscolheParaCombate = (props) => {
                   treinador:treinador,
                   pokemoms:pokemomsParaBatalha
                 }
-              }}><button>Avançar</button></NavLink>
+              }}><button className="btn btn-success mb-2">Avançar</button></NavLink>
             :
               'Você só pode escolher apenas 6 pokemons'
         }

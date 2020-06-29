@@ -1,0 +1,7 @@
+td,th {
+    text-align: center;
+}
+table tr:first-child th {
+    background-color: gray;
+    color: white;
+}

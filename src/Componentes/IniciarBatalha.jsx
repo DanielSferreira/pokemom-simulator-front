@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 const IniciarBatalha = (props) => {
-
   
   function IncializarBatalha() {
     ChamarNovaBatalhaEnquantoHoverPokemom(props.MovesPlayer, props.MovesOponent, { atual_poke_pl: 0, atual_poke_op: 0 });
@@ -43,16 +42,17 @@ const IniciarBatalha = (props) => {
 
   }
 
+  const resultadoRodada = []
+
   async function simular_batalha(player, oponent) {
-    // console.log(player, oponent)
-    let cont = 0
+    console.log(resultadoRodada);
+    
     let vezJogador = true;
     let lifes = { pl: player.moves.stats[0].base_stat, op: oponent.moves.stats[0].base_stat }
 
     let arr = []
 
     while (true) {
-      cont++;
 
       if (vezJogador) {
         let dano = await ronds(player, oponent).then(res => res);
@@ -66,22 +66,26 @@ const IniciarBatalha = (props) => {
 
       vezJogador = !vezJogador
       if (lifes.pl <= 0 || lifes.op <= 0) {
-        props.resultado({ nPlayer: player.moves.name, nOponente: oponent.moves.name, rodadas: arr, mensagem: "" })
+        resultadoRodada.push({ nPlayer: player.moves.name, nOponente: oponent.moves.name, rodadas: arr, mensagem: "" })
+        props.resultado(resultadoRodada)
       }
-      if (lifes.pl <= 0) {
+      if (lifes.pl <= 0) 
         return false
-      }
-      if (lifes.op <= 0) {
+      
+      if (lifes.op <= 0) 
         return true
-      }
 
     }
   }
+  
   async function ChamarNovaBatalhaEnquantoHoverPokemom(player, oponent, next) {
     props.MudarParaBatalha(true)
-    console.log(next);
-    
+
     let resultadoBatalha = await simular_batalha(player[next.atual_poke_pl], oponent[next.atual_poke_op]).then(res => res)
+
+    if (next.atual_poke_op === 5 || next.atual_poke_pl === 5) {
+      //props.resultado(resultadoRodada)
+    }
 
     if (next.atual_poke_op === 5) {
       console.log("Jogador venceu");
@@ -101,7 +105,7 @@ const IniciarBatalha = (props) => {
   return (
     <button 
       onClick={() => { IncializarBatalha() }}
-      className="button button-success"
+      className="btn btn-success"
     >
       Simular Super Batalhas epicas
     </button>

@@ -13,19 +13,19 @@ const ComecarCombate = (props) => {
 
   const [player, setPlayer] = useReducer(rPlayer, PlayerStruct);
   const MovesPlayer = [];
-  
+
   const [pokemomsAdversarios, setPokemomsAdversarios] = useReducer(rPlayer, PokemomsAdversarios);
   const MovesOponent = [];
 
   function getMovimentos() {
     player.pokemoms.forEach((a, b) => {
       axios.get("https://pokeapi.co/api/v2/pokemon/" + a.id)
-        .then(res => { MovesPlayer.push( { 'numero': b, 'moves': res.data } ) })
+        .then(res => { MovesPlayer.push({ 'numero': b, 'moves': res.data }) })
     })
 
     pokemomsAdversarios.forEach((a, b) => {
       axios.get("https://pokeapi.co/api/v2/pokemon/" + a.id_pokedex)
-      .then(res => { MovesOponent.push( { 'numero': b, 'moves': res.data } ) })
+        .then(res => { MovesOponent.push({ 'numero': b, 'moves': res.data }) })
     })
   }
 
@@ -43,8 +43,14 @@ const ComecarCombate = (props) => {
           :
           <div>
             <h2>Sou um cara chamado, {player.treinador[1]}</h2>
-            <PokemomsAdversariosRandom teste={(r) => setPokemomsAdversarios(r)} />
-            <h2 onClick={() => getMovimentos()}>GetMovimentos</h2>
+            <p>
+              <PokemomsAdversariosRandom teste={(r) => setPokemomsAdversarios(r)} />
+            </p>
+            <p>
+              <button className="btn btn-success" onClick={() => getMovimentos()}>GetMovimentos</button>
+            </p>
+            <p>
+            </p>
             {
               comecoLuta ?
 
@@ -75,17 +81,17 @@ const ComecarCombate = (props) => {
                           </thead>
 
                           <tbody>
-                            {e.rodadas.map((e,key)=>{
+                            {e.rodadas.map((e, key) => {
                               return (
                                 <tr key={'tr' + key}>
-                              <td>{e[0]}</td>
-                              <td>{e[1]}</td>
-                              <td>{ key%2===0 ? 'Ataca' : 'Defende' }</td>
-                              <td>VS</td>
-                              <td>{ key%2===0 ? 'Defende' : 'Ataca' }</td>
-                              <td>{e[2]}</td>
-                              <td>{e[3]}</td>
-                            </tr>
+                                  <td>{e[0]}</td>
+                                  <td>{e[1]}</td>
+                                  <td>{key % 2 === 0 ? 'Ataca' : 'Defende'}</td>
+                                  <td>VS</td>
+                                  <td>{key % 2 === 0 ? 'Defende' : 'Ataca'}</td>
+                                  <td>{e[2]}</td>
+                                  <td>{e[3]}</td>
+                                </tr>
                               )
                             })}
                           </tbody>
@@ -93,20 +99,21 @@ const ComecarCombate = (props) => {
                       )
                     })
                   }
-                 
+
                 </>
                 :
                 <>
-                  <ListarPokemomsBatalha 
-                    player={player} 
-                    oponente={pokemomsAdversarios} 
+                  <ListarPokemomsBatalha
+                    player={player}
+                    oponente={pokemomsAdversarios}
                   />
 
-                  <IniciarBatalha 
+                  <IniciarBatalha
                     resultado={(r) => setresBatlle(resBatlle.concat(r))} 
-                    MovesPlayer={MovesPlayer} 
+                    //resultado={(r) => setresBatlle(r) }
+                    MovesPlayer={MovesPlayer}
                     MovesOponent={MovesOponent}
-                    MudarParaBatalha={(r) => setComecoLuta(r)} 
+                    MudarParaBatalha={(r) => setComecoLuta(r)}
                   />
                 </>
             }

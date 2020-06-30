@@ -30,83 +30,88 @@ const IniciarBatalha = (props) => {
   }
 
   function ronds(atk, def) {
-
-    let damage = calcularDano(
+    
+    return calcularDano(
       1 // level do atacante
       , atk.moves.moves[move_postion(atk.moves.moves.length)].move.name //nome do ataque
       , atk.moves.stats[1].base_stat //poder de ataque do atacante
       , def.moves.stats[2].base_stat //poder de defesa do defensor
     )
 
-    return damage
-
   }
 
   const resultadoRodada = []
 
+  async function roundFaciliter(atacante, defensor, timeOfPlayer) {
+      let dano = await ronds(atacante, defensor).then(res => res);
+      defensor.moves.stats[0].base_stat = defensor.moves.stats[0].base_stat - dano
+      
+      if(timeOfPlayer) {
+        return {
+          hpAtt:  atacante.moves.stats[0].base_stat, 
+          actAtt: dano,
+          actDef: defensor.moves.stats[2].base_stat,
+          hpDef:  defensor.moves.stats[0].base_stat
+        }
+      }
+      else {
+        return {
+          hpAtt:  defensor.moves.stats[0].base_stat, 
+          actAtt: defensor.moves.stats[2].base_stat,
+          actDef: dano,
+          hpDef:  atacante.moves.stats[0].base_stat
+        }
+      }
+  }
+
   async function simular_batalha(player, oponent) {
-    console.log(resultadoRodada);
     
     let vezJogador = true;
-    let lifes = { pl: player.moves.stats[0].base_stat, op: oponent.moves.stats[0].base_stat }
-
     let arr = []
 
     while (true) {
-
-      if (vezJogador) {
-        let dano = await ronds(player, oponent).then(res => res);
-        lifes.op = lifes.op - dano
-        arr.push([lifes.op + dano, dano, oponent.moves.stats[0].base_stat, lifes.pl])
-      } else {
-        let dano = await ronds(oponent, player).then(res => res);
-        lifes.pl = lifes.pl - dano
-        arr.push([lifes.pl + dano, oponent.moves.stats[0].base_stat, dano, lifes.op])
-      }
-
+      if (vezJogador)
+        arr.push(await roundFaciliter(player, oponent, true ))
+      else
+        arr.push(await roundFaciliter(oponent, player, false))
+     
       vezJogador = !vezJogador
-      if (lifes.pl <= 0 || lifes.op <= 0) {
+
+      if (player.moves.stats[0].base_stat <= 0 || oponent.moves.stats[0].base_stat <= 0) {
         resultadoRodada.push({ nPlayer: player.moves.name, nOponente: oponent.moves.name, rodadas: arr, mensagem: "" })
         props.resultado(resultadoRodada)
       }
-      if (lifes.pl <= 0) 
-        return false
+      if (player.moves.stats[0].base_stat <= 0) { console.log(`${player.moves.name} está fora de combate, ${oponent.moves.name} é o vencedor`); return false}
       
-      if (lifes.op <= 0) 
-        return true
+      if (oponent.moves.stats[0].base_stat <= 0) { console.log(`${oponent.moves.name} está fora de combate, ${player.moves.name} é o vencedor`); return true}
 
     }
   }
   
   async function ChamarNovaBatalhaEnquantoHoverPokemom(player, oponent, next) {
+    console.log(player, oponent);
+    
     props.MudarParaBatalha(true)
 
     let resultadoBatalha = await simular_batalha(player[next.atual_poke_pl], oponent[next.atual_poke_op]).then(res => res)
 
-    if (next.atual_poke_op === 5 || next.atual_poke_pl === 5) {
-      //props.resultado(resultadoRodada)
-    }
-
-    if (next.atual_poke_op === 5) {
-      console.log("Jogador venceu");
-      return "Jogador venceu"
-    }
-    if (next.atual_poke_pl === 5) {
-      console.log("Jogador perdeu");
-      return "Jogador perdeu"
-    }
     if (resultadoBatalha === false) {
+      if (next.atual_poke_pl + 1 > 5) {
+        console.log("Jogador Perdeu")
+        return null
+      }
       ChamarNovaBatalhaEnquantoHoverPokemom(player, oponent, { atual_poke_pl: next.atual_poke_pl + 1, atual_poke_op: next.atual_poke_op })
     }
     if (resultadoBatalha === true) {
+      if (next.atual_poke_op + 1 > 5) {
+        console.log("Jogador Venceu")
+        return null
+      }
       ChamarNovaBatalhaEnquantoHoverPokemom(player, oponent, { atual_poke_pl: next.atual_poke_pl, atual_poke_op: next.atual_poke_op + 1 })
     }
   }
   return (
-    <button 
-      onClick={() => { IncializarBatalha() }}
-      className="btn btn-success"
-    >
+    <button onClick={() => { IncializarBatalha() }} className="btn btn-success" >
       Simular Super Batalhas epicas
     </button>
   )

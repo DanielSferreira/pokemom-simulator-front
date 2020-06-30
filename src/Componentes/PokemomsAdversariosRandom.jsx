@@ -27,8 +27,7 @@ const PokemomsAdversariosRandom = (props) => {
 
     }, []);
     function pacoca() {
-        setEsconder(!Esconder)
-        console.log("Vamos lá")
+        setEsconder(!Esconder)  
         props.teste([Poke1, Poke2, Poke3, Poke4, Poke5, Poke6])
     }
     return <button className="btn btn-primary mb-2" onClick={pacoca}>Procurar Oponentes</button>

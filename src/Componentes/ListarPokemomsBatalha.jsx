@@ -1,9 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const ListarPokemomsBatalha = (props) => {
 
+  const [Player,setPlayer] = useState([])
+  useEffect(()=>{
+  },[])
   return (
     <>
+      <button onClick={()=>setPlayer(props.player)}>Eu</button>
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
@@ -11,23 +17,23 @@ const ListarPokemomsBatalha = (props) => {
           </tr>
           <tr>
             <th>?</th>
-            <th>Pokemoms de: {props.player.treinador[1]}</th>
+            <th>Luta Pokemom</th>
             <th></th>
-            <th>Pokemoms do Oponente</th>
+            <th>Outro noom</th>
             <th>?</th>
           </tr>
         </thead>
 
         <tbody>
           {
-            props.player.pokemoms.map((a, b) => {
+            Player.map((a, b) => {
               return (
                 <tr key={b}>
-                  <td>?</td>
-                  <td>{a.value}</td>
+                  <td><img src={a.moves.sprites.front_default} alt="Aviso"/></td>
+                  <td>{a.moves.name}</td>
                   <td>VS</td>
-                  <td>{props.oponente[b].pokemom_nome}</td>
-                  <td>?</td>
+                  <td>{props.oponente[b].moves.name}</td>
+                  <td><img src={props.oponente[b].moves.sprites.front_default} alt="Aviso"/></td>
                 </tr>
               )
             })

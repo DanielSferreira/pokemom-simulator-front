@@ -13,7 +13,7 @@ Realmente essa brincadeira nunca acaba, o proposito inicial era ser simplesmente
 - Os movimentos do ataques que geram o dano são aleatorios, (no futuro colocarei a possibilidade de escolher o ataque, e fazer aparecer o nome do ataque junto nas estatisticas de batalha)
 - E por ultimo (por enquanto), um relatorio com estatisticas com o resultado de batalha em cada round 
 
-### O que falta fazer
+### O que falta (quero) fazer
 
 - Poder escolher os ataques que o pokemom irá usar
 - Em vez de ser pokemom aleatorios ter a opção de lutar com outro treinador cadastrado

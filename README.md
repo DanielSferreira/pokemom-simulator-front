@@ -7,15 +7,15 @@ Realmente essa brincadeira nunca acaba, o proposito inicial era ser simplesmente
 
 ### O que foi feito
 
--Possilidade de cadastrar um treinador
--Associar pokemons para o treinador cadastrado
--Simular batalhas com Pokemom
--Os movimentos do ataques que geram o dano são aleatorios, (no futuro colocarei a possibilidade de escolher o ataque, e fazer aparecer o nome do ataque junto nas estatisticas de batalha)
--E por ultimo (por enquanto), um relatorio com estatisticas com o resultado de batalha em cada round 
+- Possilidade de cadastrar um treinador
+- Associar pokemons para o treinador cadastrado
+- Simular batalhas com Pokemom
+- Os movimentos do ataques que geram o dano são aleatorios, (no futuro colocarei a possibilidade de escolher o ataque, e fazer aparecer o nome do ataque junto nas estatisticas de batalha)
+- E por ultimo (por enquanto), um relatorio com estatisticas com o resultado de batalha em cada round 
 
 ### O que falta fazer
 
--poder escolher os ataques que o pokemom irá usar
--em vez de ser pokemom aleatorios ter a opção de lutar com outro treinador cadastrado
--poder mudar o nível do pokemom
--E por ultimo poder batalhar com outra pessoa online
+- Poder escolher os ataques que o pokemom irá usar
+- Em vez de ser pokemom aleatorios ter a opção de lutar com outro treinador cadastrado
+- Poder mudar o nível do pokemom
+- E por ultimo poder batalhar com outra pessoa online
